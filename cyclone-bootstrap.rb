@@ -12,12 +12,23 @@ class CycloneBootstrap < Formula
   depends_on :xcode 
 
   def install_cyclone_files
-    bin.install_symlink libexec/"cyclone"
-    bin.install_symlink libexec/"icyc"
-    lib.install_symlink libexec/"libcyclone.a"
+    bin.mkdir
+    include.mkdir
+    lib.mkdir
+    share.mkdir
+    libexec.install %w[scheme srfi include]
+    mkdir libexec/"bin"
+    (libexec/"bin").install "cyclone"
+    (libexec/"bin").install "icyc"
+    bin.install_symlink Dir["#{libexec}/bin/*"]
+    mkdir libexec/"lib"
+    (libexec/"lib").install "libcyclone.a"
+    lib.install_symlink Dir["#{libexec}/lib/*"]
     mkdir include/"cyclone"
     (include/"cyclone").install_symlink Dir["#{libexec}/include/cyclone/*.h"]
-    mkdir_p share/"cyclone/scheme"
+    mkdir share/"cyclone"
+    mkdir share/"cyclone/scheme"
+    mkdir share/"cyclone/scheme/cyclone"
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.sld"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.o"]
 	(share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.so"]
@@ -28,14 +39,14 @@ class CycloneBootstrap < Formula
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/array-list.meta"]
     (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.o"]
     (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.so"]
-    mkdir_p share/"cyclone/srfi"
+    mkdir share/"cyclone/srfi"
     (share/"cyclone/srfi").install_symlink Dir["#{libexec}/srfi/*.sld"]
     (share/"cyclone/srfi").install_symlink Dir["#{libexec}/srfi/*.scm"]
-    mkdir_p share/"cyclone/srfi/list-queues"
+    mkdir share/"cyclone/srfi/list-queues"
     (share/"cyclone/srfi/list-queues").install_symlink Dir["#{libexec}/srfi/list-queues/*.scm"]
-    mkdir_p share/"cyclone/srfi/sorting"
+    mkdir share/"cyclone/srfi/sorting"
     (share/"cyclone/srfi/sorting").install_symlink Dir["#{libexec}/srfi/sorting/*.scm"]
-    mkdir_p share/"cyclone/srfi/sets"
+    mkdir share/"cyclone/srfi/sets"
     (share/"cyclone/srfi/sets").install_symlink Dir["#{libexec}/srfi/sets/*.scm"]
     (share/"cyclone/srfi").install_symlink Dir["#{libexec}/srfi/*.meta"]
     (share/"cyclone/srfi").install_symlink Dir["#{libexec}/srfi/*.o"]
