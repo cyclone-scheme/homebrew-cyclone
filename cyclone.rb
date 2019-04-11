@@ -8,7 +8,7 @@ class Cyclone < Formula
   depends_on "gcc"
   depends_on "libtommath"
   depends_on "ck"
-  #depends_on "cyclone-bootstrap"
+  depends_on "cyclone-bootstrap"
   depends_on :xcode 
 
   def install_cyclone_files
