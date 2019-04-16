@@ -1,14 +1,14 @@
 class CycloneBootstrap < Formula
   desc ":cyclone-bootstrap: R7RS Scheme compiler used to bootstrap the cyclone R7RS Scheme compiler"
   homepage "http://justinethier.github.io/cyclone/"
-  #url "https://github.com/justinethier/cyclone/archive/v0.10.tar.gz"
-  url "https://github.com/adamfeuer/cyclone-bootstrap/archive/v0.10.1-test-af1.tar.gz"
-  sha256 "74573232e31ec70f2a80aea4b2d83430166ec2400967158ece771e1d07330c84"
-  version "0.10.1-test-af1"
+  url "https://github.com/justinethier/cyclone-bootstrap/archive/v0.11.tar.gz"
+  sha256 "acc77b2db98074a41621f8c85b79361d7f3c94fc4af0aae061a1f64e5070b3f9"
+  version "v0.11"
   depends_on "git"
   depends_on "gcc"
   depends_on "libtommath"
   depends_on "ck"
+  depends_on "cyclone-bootstrap"
   depends_on :xcode 
 
   def install_cyclone_files
@@ -55,6 +55,7 @@ class CycloneBootstrap < Formula
 
   def install
     ENV.deparallelize
+    ENV.prepend_path "PATH", "/usr/local/bin"
     system "make"
     install_cyclone_files
   end
