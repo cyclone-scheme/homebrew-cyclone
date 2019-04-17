@@ -4,8 +4,8 @@ Formulae for the Cyclone Scheme compiler.
 
 ## How do I install these formulae?
 
-* `brew tap adamfeuer/cyclone`
-* `brew install adamfeuer/cyclone/cyclone`
+* `brew tap cyclone-scheme/cyclone`
+* `brew install cyclone-scheme/cyclone/cyclone`
 
 That will install the `cyclone-bootstrap` formula, bootstrap the `cyclone` compiler, 
 and then install the full `cyclone` compiler via the `cyclone` formula.
