@@ -12,6 +12,9 @@ from io import StringIO
 import requests
 import sh
 from git import Repo
+from git_pull_request import git_pull_request
+
+HOMEBREW_CYCLONE_PROJECT_URL = "https://github.com/adamfeuer/homebrew-cyclone"
 
 CYCLONE = "cyclone"
 CYCLONE_PROJECT_URL = f"https://github.com/justinethier/{CYCLONE}"
@@ -104,12 +107,16 @@ def should_update(formula_file_name, archive_version):
 def get_templates():
     with open("cyclone-formula.rb.template") as template:
         contents = template.read()
+    updated = []
+    version = "NO_VERSION"
     for project in projects:
         formula_file_name = project["formula_file_name"]
         archive_version = get_most_recent_tag(project["name"])
+        version = archive_version
         shutil.rmtree(project["name"])
         sh.git("clone", project["git_repo_url"])
         if should_update(formula_file_name, archive_version):
+            updated.append(formula_file_name)
             print("updating formula {}".format(project["name"]))
             if should_update(formula_file_name, archive_version):
                 archive_url = "{}/{}.tar.gz".format(project["releases_url"], archive_version)
@@ -119,8 +126,26 @@ def get_templates():
                 new_contents = new_contents.replace(ARCHIVE_URL, archive_url)
                 new_contents = new_contents.replace(ARCHIVE_SHA, archive_sha)
                 new_contents = new_contents.replace(ARCHIVE_VERSION, archive_version)
-                with open(project["formula_file_name"], "w") as formula_file:
+                with open(formula_file_name, "w") as formula_file:
                     formula_file.write(new_contents)
+    if updated:
+        branch_name = "update_formulas_to_version_{}".format(version)
+        sh.git("checkout", "-b", branch_name)
+        for formula_file_name in updated:
+            sh.git("add", formula_file_name)
+        title = "update homebrew formulas to version {}".format(version) 
+        message = f"{title}\nThis pull request was created automatically by a script." 
+        comment = title
+        sh.git("commit", "-m", comment) 
+#        result = git_pull_request(
+#                target_remote=HOMEBREW_CYCLONE_PROJECT_URL,
+#            target_branch=target_branch,
+#            title=title,
+#            message=message,
+#            comment=comment,
+#            rebase=False,
+#            dont_fork=True,
+#        )
 
 
 def main():

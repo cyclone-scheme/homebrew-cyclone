@@ -10,6 +10,7 @@ sh = "*"
 ipython = "*"
 gitpython = "*"
 requests = "*"
+git-pull-request = "*"
 
 [requires]
 python_version = "3.6"
