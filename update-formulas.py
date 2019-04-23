@@ -137,7 +137,7 @@ def get_templates():
         message = f"{title}\n\n{title}\nThis pull request was created automatically by a script." 
         sh.git("commit", "-m", title) 
         sh.git("push", "--set-upstream", "origin", branch_name)  
-        sh.git("hub", "pull-request", "-m", message)
+        sh.hub("pull-request", "-m", message)
 
 
 def main():
