@@ -3,7 +3,7 @@ class Cyclone < Formula
   homepage "http://justinethier.github.io/cyclone/"
   url "https://github.com/justinethier/cyclone/archive/v0.11.tar.gz"
   sha256 "75536b72f49ad7cb7b8745dd61726af6c8a4a1436675f750b24338e94a1621bb"
-  version "v0.11"
+  version "v0.10"
   depends_on "git"
   depends_on "gcc"
   depends_on "libtommath"
