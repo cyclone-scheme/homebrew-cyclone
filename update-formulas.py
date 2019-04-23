@@ -6,6 +6,7 @@ import time
 import sys
 import hashlib
 import tempfile
+import shutil
 from io import StringIO
 
 import requests
@@ -89,21 +90,37 @@ def get_sha256_for_url(url):
     return sha256
 
 
+def should_update(formula_file_name, archive_version):
+    with open(formula_file_name, "r") as formula_file:
+        contents = formula_file.read()
+    formula_version = ""
+    for line in contents.split('\n'):
+        words = line.strip().split()
+        if len(words) > 1 and words[0] == "version":
+            formula_version = words[1].strip('"')
+    return archive_version != formula_version 
+
+
 def get_templates():
-    with open("cyclone.rb.template") as template:
+    with open("cyclone-formula.rb.template") as template:
         contents = template.read()
     for project in projects:
-        sh.git("clone", project["git_repo_url"])
+        formula_file_name = project["formula_file_name"]
         archive_version = get_most_recent_tag(project["name"])
-        archive_url = "{}/{}.tar.gz".format(project["releases_url"], archive_version)
-        archive_sha = get_sha256_for_url(archive_url)
-        new_contents = contents.replace(CLASSNAME, project["classname"])
-        new_contents = new_contents.replace(DESCRIPTION, project["description"])
-        new_contents = new_contents.replace(ARCHIVE_URL, archive_url)
-        new_contents = new_contents.replace(ARCHIVE_SHA, archive_sha)
-        new_contents = new_contents.replace(ARCHIVE_VERSION, archive_version)
-        with open(project["formula_file_name"], "w") as formula_file:
-            formula_file.write(new_contents)
+        shutil.rmtree(project["name"])
+        sh.git("clone", project["git_repo_url"])
+        if should_update(formula_file_name, archive_version):
+            print("updating formula {}".format(project["name"]))
+            if should_update(formula_file_name, archive_version):
+                archive_url = "{}/{}.tar.gz".format(project["releases_url"], archive_version)
+                archive_sha = get_sha256_for_url(archive_url)
+                new_contents = contents.replace(CLASSNAME, project["classname"])
+                new_contents = new_contents.replace(DESCRIPTION, project["description"])
+                new_contents = new_contents.replace(ARCHIVE_URL, archive_url)
+                new_contents = new_contents.replace(ARCHIVE_SHA, archive_sha)
+                new_contents = new_contents.replace(ARCHIVE_VERSION, archive_version)
+                with open(project["formula_file_name"], "w") as formula_file:
+                    formula_file.write(new_contents)
 
 
 def main():
