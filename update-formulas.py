@@ -14,7 +14,7 @@ import sh
 from git import Repo
 from git_pull_request import git_pull_request
 
-HOMEBREW_CYCLONE_PROJECT_URL = "https://github.com/adamfeuer/homebrew-cyclone"
+HOMEBREW_CYCLONE_PROJECT_URL = "git@github.com:adamfeuer/homebrew-cyclone.git"
 
 CYCLONE = "cyclone"
 CYCLONE_PROJECT_URL = f"https://github.com/justinethier/{CYCLONE}"
@@ -129,7 +129,7 @@ def get_templates():
                 with open(formula_file_name, "w") as formula_file:
                     formula_file.write(new_contents)
     if updated:
-        branch_name = "update_formulas_to_version_{}".format(version)
+        branch_name = "update_formulas_to_version_{}".format(version).replace('.', '_')
         sh.git("checkout", "-b", branch_name)
         for formula_file_name in updated:
             sh.git("add", formula_file_name)
@@ -137,15 +137,16 @@ def get_templates():
         message = f"{title}\nThis pull request was created automatically by a script." 
         comment = title
         sh.git("commit", "-m", comment) 
-#        result = git_pull_request(
-#                target_remote=HOMEBREW_CYCLONE_PROJECT_URL,
-#            target_branch=target_branch,
-#            title=title,
-#            message=message,
-#            comment=comment,
-#            rebase=False,
-#            dont_fork=True,
-#        )
+        sh.git("push", "--set-upstream", "origin", branch_name)  
+        result = git_pull_request(
+            #target_remote=HOMEBREW_CYCLONE_PROJECT_URL,
+            target_branch=branch_name,
+            title=title,
+            message=message,
+            comment=comment,
+            rebase=False,
+            dont_fork=True,
+        )
 
 
 def main():
