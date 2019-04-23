@@ -134,19 +134,10 @@ def get_templates():
         for formula_file_name in updated:
             sh.git("add", formula_file_name)
         title = "update homebrew formulas to version {}".format(version) 
-        message = f"{title}\nThis pull request was created automatically by a script." 
-        comment = title
-        sh.git("commit", "-m", comment) 
+        message = f"{title}\n\n{title}\nThis pull request was created automatically by a script." 
+        sh.git("commit", "-m", title) 
         sh.git("push", "--set-upstream", "origin", branch_name)  
-        result = git_pull_request(
-            #target_remote=HOMEBREW_CYCLONE_PROJECT_URL,
-            target_branch=branch_name,
-            title=title,
-            message=message,
-            comment=comment,
-            rebase=False,
-            dont_fork=True,
-        )
+        sh.git("hub", "pull-request", "-m", message)
 
 
 def main():
