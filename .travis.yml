@@ -8,5 +8,4 @@ install:
   - pipenv install --ignore-pipfile 
 # command to run tests
 script:
-  - pipenv shell
-  - ./update-formulas.py
+  - pipenv run ./update-formulas.py
