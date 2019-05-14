@@ -142,9 +142,8 @@ def get_templates():
         title = "update homebrew formulas to version {}".format(version) 
         message = f"{title}\n\n{title}\nThis pull request was created automatically by a script." 
         sh.git("commit", "-m", title) 
-        sh.env()
         sh.git("push", "--set-upstream", "origin", branch_name)  
-        sh.hub("pull-request", "-m", message)
+        #sh.hub("pull-request", "-m", message)
         print(f"Created pull request for branch {branch_name}.")
     else:
         print("No formulas need updating.")
