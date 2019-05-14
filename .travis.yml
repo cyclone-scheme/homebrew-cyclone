@@ -5,7 +5,8 @@ python:
 install:
   - pip install --upgrade pip
   - pip install pipenv
-  - pipenv install --ignore-pipfile 
 # command to run tests
 script:
+  - export PIPENV_IGNORE_VIRTUALENVS=1
+  - pipenv install --ignore-pipfile 
   - pipenv run ./update-formulas.py
