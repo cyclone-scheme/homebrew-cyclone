@@ -2,12 +2,14 @@
 
 import sys
 import os
+import shutil
 import time
 import sys
 import hashlib
 import tempfile
 import shutil
 from io import StringIO
+from pathlib import Path
 
 import requests
 import sh
@@ -110,6 +112,9 @@ def get_templates():
     updated = []
     version = "NO_VERSION"
     for project in projects:
+        if os.path.exists(project["name"]):
+            shutil.rmtree(project["name"])
+        sh.git("clone", project["git_repo_url"])
         formula_file_name = project["formula_file_name"]
         archive_version = get_most_recent_tag(project["name"])
         version = archive_version
