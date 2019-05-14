@@ -9,7 +9,7 @@ install:
   - sudo snap install --classic hub
 # command to run tests
 script:
-  - git config credential.helper '!f() { sleep 1; echo "username=${GIT_USER}"; echo "password=${GIT_PASSWORD}"; }; f'
+  - git config credential.helper '!f() { sleep 1; echo "username=${GITHUB_USER}"; echo "password=${GITHUB_PASSWORD}"; }; f'
   - export PIPENV_IGNORE_VIRTUALENVS=1
   - pipenv install --ignore-pipfile
   - pipenv run ./update-formulas.py
