@@ -8,6 +8,8 @@ install:
 # command to run tests
 script:
   - git config credential.helper '!f() { sleep 1; echo "username=${GIT_USER}"; echo "password=${GIT_PASSWORD}"; }; f'
+  - git clone https://github.com/justinethier/cyclone.git
+  - git clone https://github.com/justinethier/cyclone-bootstrap.git
   - export PIPENV_IGNORE_VIRTUALENVS=1
   - pipenv install --ignore-pipfile
   - pipenv run ./update-formulas.py
