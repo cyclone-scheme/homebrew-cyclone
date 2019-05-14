@@ -113,11 +113,12 @@ def get_templates():
         formula_file_name = project["formula_file_name"]
         archive_version = get_most_recent_tag(project["name"])
         version = archive_version
+        print(f'The latest tag in repo {project["name"]} is {archive_version}.') 
         shutil.rmtree(project["name"])
         sh.git("clone", project["git_repo_url"])
         if should_update(formula_file_name, archive_version):
             updated.append(formula_file_name)
-            print("updating formula {}".format(project["name"]))
+            print(f"Updating formula {formula_file_name} to {archive_version}.")
             if should_update(formula_file_name, archive_version):
                 archive_url = "{}/{}.tar.gz".format(project["releases_url"], archive_version)
                 archive_sha = get_sha256_for_url(archive_url)
@@ -138,6 +139,10 @@ def get_templates():
         sh.git("commit", "-m", title) 
         sh.git("push", "--set-upstream", "origin", branch_name)  
         sh.hub("pull-request", "-m", message)
+        print(f"Created pull request for branch {branch_name}.")
+    else:
+        print("No formulas need updating.")
+
 
 
 def main():
