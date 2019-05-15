@@ -16,7 +16,7 @@ import sh
 from git import Repo
 from git_pull_request import git_pull_request
 
-HOMEBREW_CYCLONE_PROJECT_URL = "git@github.com:adamfeuer/homebrew-cyclone.git"
+HOMEBREW_CYCLONE_PROJECT_URL = "git@github.com:cyclone-scheme/homebrew-cyclone.git"
 
 CYCLONE = "cyclone"
 CYCLONE_PROJECT_URL = f"https://github.com/justinethier/{CYCLONE}"
