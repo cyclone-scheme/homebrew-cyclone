@@ -1,9 +1,9 @@
 class CycloneBootstrap < Formula
   desc ":cyclone-bootstrap: R7RS Scheme compiler used to bootstrap the cyclone R7RS Scheme compiler"
   homepage "http://justinethier.github.io/cyclone/"
-  url "https://github.com/justinethier/cyclone-bootstrap/archive/v0.11.tar.gz"
-  sha256 "acc77b2db98074a41621f8c85b79361d7f3c94fc4af0aae061a1f64e5070b3f9"
-  version "v0.11"
+  url "https://github.com/justinethier/cyclone-bootstrap/archive/v0.11.1.tar.gz"
+  sha256 "600ce3436ca7fa3485ab33a295b59a7af663cc333121c61775b2b0834a92af97"
+  version "v0.11.1"
   depends_on "git"
   depends_on "gcc"
   depends_on "libtommath"
