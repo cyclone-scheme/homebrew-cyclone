@@ -11,11 +11,19 @@ class Cyclone < Formula
   depends_on "cyclone-bootstrap"
   depends_on :xcode 
 
+  def install_cyclone_lib_files
+    lib.mkdir
+    libexec.install %w[libs]
+    share.mkdir
+    mkdir share/"cyclone"
+    mkdir share/"cyclone/libs"
+    (share/"cyclone/libs").install_symlink Dir["#{libexec}/libs/cyclone/*.sld"]
+    (share/"cyclone/libs").install_symlink Dir["#{libexec}/libs/cyclone/*.scm"]
+  end
+
   def install_cyclone_files
     bin.mkdir
     include.mkdir
-    lib.mkdir
-    share.mkdir
     libexec.install %w[scheme srfi include]
     mkdir libexec/"bin"
     (libexec/"bin").install "cyclone"
@@ -26,12 +34,14 @@ class Cyclone < Formula
     lib.install_symlink Dir["#{libexec}/lib/*"]
     mkdir include/"cyclone"
     (include/"cyclone").install_symlink Dir["#{libexec}/include/cyclone/*.h"]
-    mkdir share/"cyclone"
+    mkdir share/"cyclone/cyclone"
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.sld"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.scm"]
     mkdir share/"cyclone/scheme"
     mkdir share/"cyclone/scheme/cyclone"
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.sld"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.o"]
-	(share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.so"]
+        (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.so"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/*.sld"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/*.scm"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/test.meta"]
@@ -51,12 +61,18 @@ class Cyclone < Formula
     (share/"cyclone/srfi").install_symlink Dir["#{libexec}/srfi/*.meta"]
     (share/"cyclone/srfi").install_symlink Dir["#{libexec}/srfi/*.o"]
     (share/"cyclone/srfi").install_symlink Dir["#{libexec}/srfi/*.so"]
-  end     
+  end
 
   def install
     ENV.deparallelize
     ENV.prepend_path "PATH", "/usr/local/bin"
-    system "make"
+    if self.class.name == "CycloneBootstrap"
+        system "make"
+        install_cyclone_lib_files
+    else
+        install_cyclone_lib_files
+        system "make"
+    end
     install_cyclone_files
   end
 
