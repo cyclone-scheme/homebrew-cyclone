@@ -1,9 +1,9 @@
 class CycloneBootstrap < Formula
   desc ":cyclone-bootstrap: R7RS Scheme compiler used to bootstrap the cyclone R7RS Scheme compiler"
   homepage "http://justinethier.github.io/cyclone/"
-  url "https://github.com/justinethier/cyclone-bootstrap/archive/v0.11.2.tar.gz"
-  sha256 "632d2c4019a10a71ffebfa1e643fd9fad6ac7182f1a88f014ba9dbcbdba654bf"
-  version "v0.11.2"
+  url "https://github.com/justinethier/cyclone-bootstrap/archive/v0.11.3.tar.gz"
+  sha256 "bc80bee12e935746f1e881799a84ed43bcd95ce034709d7bae8884b5b1ccf290"
+  version "v0.11.3"
   depends_on "git"
   depends_on "gcc"
   depends_on "libtommath"
@@ -66,12 +66,12 @@ class CycloneBootstrap < Formula
   def install
     ENV.deparallelize
     ENV.prepend_path "PATH", "/usr/local/bin"
-    if self.class.name.demodulize == "CycloneBootstrap"
-        system "make"
-        install_cyclone_lib_files
+    if self.class.name == "CycloneBootstrap"
+    	system "make"
+        install_cyclone_lib_files 
     else
-        install_cyclone_lib_files
-        system "make"
+        install_cyclone_lib_files 
+    	system "make"
     end
     install_cyclone_files
   end
