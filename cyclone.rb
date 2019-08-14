@@ -1,9 +1,9 @@
 class Cyclone < Formula
   desc ":cyclone: A brand-new compiler that allows practical application development using R7RS Scheme."
   homepage "http://justinethier.github.io/cyclone/"
-  url "https://github.com/justinethier/cyclone/archive/v0.11.2.tar.gz"
-  sha256 "e95d246e3bde8a8567f1d3e211ea49d38bf9d0d49224c8ec5ec96677c8740946"
-  version "v0.11.2"
+  url "https://github.com/justinethier/cyclone/archive/v0.11.3.tar.gz"
+  sha256 "42677208d71483ee66452b07a5f2481c784cc31150c41e9fb252c7b73ed14985"
+  version "v0.11.3"
   depends_on "git"
   depends_on "gcc"
   depends_on "libtommath"
@@ -67,11 +67,11 @@ class Cyclone < Formula
     ENV.deparallelize
     ENV.prepend_path "PATH", "/usr/local/bin"
     if self.class.name == "CycloneBootstrap"
-        system "make"
-        install_cyclone_lib_files
+    	system "make"
+        install_cyclone_lib_files 
     else
-        install_cyclone_lib_files
-        system "make"
+        install_cyclone_lib_files 
+    	system "make"
     end
     install_cyclone_files
   end
