@@ -72,16 +72,16 @@ class CycloneBootstrap < Formula
     ENV.deparallelize
     ENV.prepend_path "PATH", "/usr/local/bin"
     if self.class.name == "CycloneBootstrap"
-    	system "make"
+    	system "gmake"
         install_cyclone_lib_files 
     else
         install_cyclone_lib_files 
-    	system "make"
+    	system "gmake"
     end
     install_cyclone_files
   end
 
   test do
-      system "make test"
+      system "gmake test"
   end
 end
