@@ -1,9 +1,9 @@
 class CycloneBootstrap < Formula
   desc ":cyclone-bootstrap: R7RS Scheme compiler used to bootstrap the cyclone R7RS Scheme compiler"
   homepage "http://justinethier.github.io/cyclone/"
-  url "https://github.com/justinethier/cyclone-bootstrap/archive/v0.11.5.tar.gz"
-  sha256 "7e231f3fecc828ca6c6dd1ef34495b96f235894fee2762b7f6581380cbe36ac9"
-  version "v0.11.5"
+  url "https://github.com/justinethier/cyclone-bootstrap/archive/v0.11.6.tar.gz"
+  sha256 "8b7f02ab11840034502da7f7270ca9903d46a59382f1c314522bf9fbe68b9d81"
+  version "v0.11.6"
   depends_on "git"
   depends_on "gcc"
   depends_on "libtommath"
@@ -16,12 +16,9 @@ class CycloneBootstrap < Formula
     libexec.install %w[libs]
     share.mkdir
     mkdir share/"cyclone"
-    mkdir share/"cyclone/cyclone"
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.sld"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.scm"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.c"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/test.meta"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/match.meta"]
+    mkdir share/"cyclone/libs"
+    (share/"cyclone/libs").install_symlink Dir["#{libexec}/libs/cyclone/*.sld"]
+    (share/"cyclone/libs").install_symlink Dir["#{libexec}/libs/cyclone/*.scm"]
   end
 
   def install_cyclone_files
@@ -38,12 +35,8 @@ class CycloneBootstrap < Formula
     mkdir include/"cyclone"
     (include/"cyclone").install_symlink Dir["#{libexec}/include/cyclone/*.h"]
     mkdir share/"cyclone/cyclone"
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.sld"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.scm"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/test.meta"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/match.meta"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.o"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.so"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.sld"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.scm"]
     mkdir share/"cyclone/scheme"
     mkdir share/"cyclone/scheme/cyclone"
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.sld"]
@@ -51,6 +44,8 @@ class CycloneBootstrap < Formula
         (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.so"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/*.sld"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/*.scm"]
+    (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/test.meta"]
+    (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/match.meta"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/array-list.meta"]
     (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.o"]
     (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.so"]
@@ -72,8 +67,6 @@ class CycloneBootstrap < Formula
     ENV.deparallelize
     ENV.prepend_path "PATH", "/usr/local/bin"
     if self.class.name == "CycloneBootstrap"
-    	system "pwd" # DEBUG
-    	system "ls -l *" # DEBUG
     	system "make"
         install_cyclone_lib_files 
     else
