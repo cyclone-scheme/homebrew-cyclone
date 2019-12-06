@@ -2,7 +2,7 @@ class CycloneBootstrap < Formula
   desc ":cyclone-bootstrap: R7RS Scheme compiler used to bootstrap the cyclone R7RS Scheme compiler"
   homepage "http://justinethier.github.io/cyclone/"
   url "https://github.com/justinethier/cyclone-bootstrap/archive/master.tar.gz"
-  sha256 "22c8af27ede138c6da869d768abcaf7fa3db6efd6a8f8f42d5b88393995fd9a7"
+  sha256 "a878f545cf8b4de85697c4a7c49aa2c3631a18f0c064b9cf89cad4d44cb4ecac"
   version "v0.11.6"
   depends_on "git"
   depends_on "gcc"
@@ -13,12 +13,12 @@ class CycloneBootstrap < Formula
 
   def install_cyclone_lib_files
     lib.mkdir
-    libexec.install %w[cyc-libs]
+    libexec.install %w[libs]
     share.mkdir
     mkdir share/"cyclone"
-    mkdir share/"cyclone/cyc-libs"
-    (share/"cyclone/cyc-libs").install_symlink Dir["#{libexec}/cyclone/*.sld"]
-    (share/"cyclone/cyc-libs").install_symlink Dir["#{libexec}/cyclone/*.scm"]
+    mkdir share/"cyclone/libs"
+    (share/"cyclone/libs").install_symlink Dir["#{libexec}/cyclone/*.sld"]
+    (share/"cyclone/libs").install_symlink Dir["#{libexec}/cyclone/*.scm"]
   end
 
   def install_cyclone_files
