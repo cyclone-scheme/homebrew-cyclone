@@ -13,12 +13,12 @@ class CycloneBootstrap < Formula
 
   def install_cyclone_lib_files
     lib.mkdir
-    libexec.install %w[libs]
+    libexec.install %w[cyc-libs]
     share.mkdir
     mkdir share/"cyclone"
-    mkdir share/"cyclone/libs"
-    (share/"cyclone/libs").install_symlink Dir["#{libexec}/libs/cyclone/*.sld"]
-    (share/"cyclone/libs").install_symlink Dir["#{libexec}/libs/cyclone/*.scm"]
+    mkdir share/"cyclone/cyc-libs"
+    (share/"cyclone/cyc-libs").install_symlink Dir["#{libexec}/cyclone/*.sld"]
+    (share/"cyclone/cyc-libs").install_symlink Dir["#{libexec}/cyclone/*.scm"]
   end
 
   def install_cyclone_files
@@ -66,13 +66,8 @@ class CycloneBootstrap < Formula
   def install
     ENV.deparallelize
     ENV.prepend_path "PATH", "/usr/local/bin"
-    if self.class.name == "CycloneBootstrap"
-    	system "make"
-        install_cyclone_lib_files 
-    else
-        install_cyclone_lib_files 
-    	system "make"
-    end
+    system "make"
+    install_cyclone_lib_files 
     install_cyclone_files
   end
 
