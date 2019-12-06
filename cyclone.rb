@@ -1,9 +1,9 @@
 class Cyclone < Formula
   desc ":cyclone: A brand-new compiler that allows practical application development using R7RS Scheme."
   homepage "http://justinethier.github.io/cyclone/"
-  url "https://github.com/justinethier/cyclone/archive/v0.11.6.tar.gz"
-  sha256 "42bc920c4324cb329b799c686d8f4415177d1d019b3514a53af29b84730d0e05"
-  version "v0.11.6"
+  url "https://github.com/justinethier/cyclone/archive/v0.11.7.tar.gz"
+  sha256 "890b35bda0a3c9d79707165086feab279d3b30316ff21eaf20408ac3771c0295"
+  version "v0.11.7"
   depends_on "git"
   depends_on "gcc"
   depends_on "libtommath"
@@ -17,8 +17,8 @@ class Cyclone < Formula
     share.mkdir
     mkdir share/"cyclone"
     mkdir share/"cyclone/libs"
-    (share/"cyclone/libs").install_symlink Dir["#{libexec}/libs/cyclone/*.sld"]
-    (share/"cyclone/libs").install_symlink Dir["#{libexec}/libs/cyclone/*.scm"]
+    (share/"cyclone/libs").install_symlink Dir["#{libexec}/cyclone/*.sld"]
+    (share/"cyclone/libs").install_symlink Dir["#{libexec}/cyclone/*.scm"]
   end
 
   def install_cyclone_files
@@ -66,13 +66,8 @@ class Cyclone < Formula
   def install
     ENV.deparallelize
     ENV.prepend_path "PATH", "/usr/local/bin"
-    if self.class.name == "CycloneBootstrap"
-    	system "make"
-        install_cyclone_lib_files 
-    else
-        install_cyclone_lib_files 
-    	system "make"
-    end
+    system "make"
+    install_cyclone_lib_files 
     install_cyclone_files
   end
 
