@@ -31,6 +31,7 @@ class CycloneBootstrap < Formula
     bin.install_symlink Dir["#{libexec}/bin/*"]
     mkdir libexec/"lib"
     (libexec/"lib").install "libcyclone.a"
+    (libexec/"lib").install "libcyclonebn.a"
     lib.install_symlink Dir["#{libexec}/lib/*"]
     mkdir include/"cyclone"
     (include/"cyclone").install_symlink Dir["#{libexec}/include/cyclone/*.h"]
