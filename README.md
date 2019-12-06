@@ -5,10 +5,9 @@ Formulae for the Cyclone Scheme compiler.
 ## How do I install these formulae?
 
 * `brew tap cyclone-scheme/cyclone`
-* `brew install cyclone-scheme/cyclone/cyclone`
+* `brew install cyclone-scheme/cyclone/cyclone-bootstrap`
 
-That will install the `cyclone-bootstrap` formula, bootstrap the `cyclone` compiler, 
-and then install the full `cyclone` compiler via the `cyclone` formula.
+That will install the full `cyclone` compiler via the `cyclone-bootstrap` formula.
 
 
 ## More Documentation, Troubleshooting, Contributing, Security, Community, Donations, License and Sponsors
