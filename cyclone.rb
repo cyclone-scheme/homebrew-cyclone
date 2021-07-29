@@ -1,9 +1,9 @@
 class Cyclone < Formula
   desc ":cyclone: A brand-new compiler that allows practical application development using R7RS Scheme."
   homepage "http://justinethier.github.io/cyclone/"
-  url "https://github.com/justinethier/cyclone/archive/v0.30.0.tar.gz"
-  sha256 "7a649393e486ff9af224a156cedbe736000e0d1d43b2cf9bbbc17966c34a82ee"
-  version "v0.30.0"
+  url "https://github.com/justinethier/cyclone/archive/v0.31.0.tar.gz"
+  sha256 "f7cca3448d4fa70a45df6efc018da6d0f241ac53156c91c0b3e28268d8048f62"
+  version "v0.31.0"
   depends_on "git"
   depends_on "gcc"
   depends_on "ck"
