@@ -48,6 +48,8 @@ class CycloneBootstrap < Formula
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/array-list.meta"]
     (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.o"]
     (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.so"]
+    (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.sld"]
+    (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.scm"]
     mkdir share/"cyclone/srfi"
     (share/"cyclone/srfi").install_symlink Dir["#{libexec}/srfi/*.sld"]
     (share/"cyclone/srfi").install_symlink Dir["#{libexec}/srfi/*.scm"]
