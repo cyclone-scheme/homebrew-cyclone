@@ -35,11 +35,11 @@ class CycloneBootstrap < Formula
     mkdir include/"cyclone"
     (include/"cyclone").install_symlink Dir["#{libexec}/include/cyclone/*.h"]
     mkdir share/"cyclone/cyclone"
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.o"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.so"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.sld"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.scm"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.meta"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/cyclone/*.o"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/cyclone/*.so"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/cyclone/*.sld"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/cyclone/*.scm"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/cyclone/*.meta"]
     mkdir share/"cyclone/scheme"
     mkdir share/"cyclone/scheme/cyclone"
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.sld"]
