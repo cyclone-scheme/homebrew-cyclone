@@ -26,6 +26,7 @@ class CycloneBootstrap < Formula
     mkdir libexec/"bin"
     (libexec/"bin").install "cyclone"
     (libexec/"bin").install "icyc"
+    (libexec/"bin").install "winds"
     bin.install_symlink Dir["#{libexec}/bin/*"]
     mkdir libexec/"lib"
     (libexec/"lib").install "libcyclone.a"
@@ -34,18 +35,19 @@ class CycloneBootstrap < Formula
     mkdir include/"cyclone"
     (include/"cyclone").install_symlink Dir["#{libexec}/include/cyclone/*.h"]
     mkdir share/"cyclone/cyclone"
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.o"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.so"]
     (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.sld"]
     (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.scm"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/cyclone/cyclone/*.meta"]
     mkdir share/"cyclone/scheme"
     mkdir share/"cyclone/scheme/cyclone"
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.sld"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.o"]
-        (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.so"]
+    (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.so"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/*.sld"]
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/*.scm"]
-    (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/test.meta"]
-    (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/match.meta"]
-    (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/array-list.meta"]
+    (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/cyclone/*.meta"]
     (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.o"]
     (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.so"]
     (share/"cyclone/scheme/cyclone").install_symlink Dir["#{libexec}/scheme/cyclone/*.sld"]
