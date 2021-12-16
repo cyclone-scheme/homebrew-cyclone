@@ -14,12 +14,18 @@ class CycloneBootstrap < Formula
     libexec.install %w[libs]
     share.mkdir
     mkdir share/"cyclone"
+    mkdir share/"cyclone/libs"
+    (share/"cyclone/libs").install_symlink Dir["#{libexec}/cyclone/*.sld"]
+    (share/"cyclone/libs").install_symlink Dir["#{libexec}/cyclone/*.scm"]
+    mkdir share/"cyclone/cyclone"
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.sld"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.scm"]      
   end
 
   def install_cyclone_files
     bin.mkdir
     include.mkdir
-    libexec.install %w[libs scheme srfi include]
+    libexec.install %w[scheme srfi include]
     mkdir libexec/"bin"
     (libexec/"bin").install "cyclone"
     (libexec/"bin").install "icyc"
