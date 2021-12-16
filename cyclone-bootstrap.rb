@@ -18,8 +18,11 @@ class CycloneBootstrap < Formula
     (share/"cyclone/libs").install_symlink Dir["#{libexec}/cyclone/*.sld"]
     (share/"cyclone/libs").install_symlink Dir["#{libexec}/cyclone/*.scm"]
     mkdir share/"cyclone/cyclone"
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.o"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.so"]
     (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.sld"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.scm"]      
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.scm"]
+    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/*.meta"]      
   end
 
   def install_cyclone_files
@@ -37,12 +40,6 @@ class CycloneBootstrap < Formula
     lib.install_symlink Dir["#{libexec}/lib/*"]
     mkdir include/"cyclone"
     (include/"cyclone").install_symlink Dir["#{libexec}/include/cyclone/*.h"]
-    mkdir share/"cyclone/cyclone"
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/cyclone/*.o"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/cyclone/*.so"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/cyclone/*.sld"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/cyclone/*.scm"]
-    (share/"cyclone/cyclone").install_symlink Dir["#{libexec}/libs/cyclone/cyclone/*.meta"]
     mkdir share/"cyclone/scheme"
     mkdir share/"cyclone/scheme/cyclone"
     (share/"cyclone/scheme").install_symlink Dir["#{libexec}/scheme/*.sld"]
